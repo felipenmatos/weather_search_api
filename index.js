@@ -7,7 +7,7 @@ const port = process.env.PORT || 8000;
 
 const locales = require("./src/dados/dados.json");
 
-app.use(cors());
+app.use(cors({ origin: port }));
 
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
@@ -34,7 +34,8 @@ app.use(function (req, res, next) {
 });
 
 app.get("/locales", (req, res) => {
-  return res.json(locales);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.json(locales);
 });
 
 app.listen(port, () => {
